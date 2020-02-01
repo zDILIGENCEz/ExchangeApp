@@ -42,13 +42,20 @@ class MainDateListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Today Rate"
         
+        setupTitle()
         setupDates()
         setupDelegates()
     }
     
     // MARK: - Private methods
+    
+    private func setupTitle() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormats.dayWithMonthYear
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        title = "Rate for \(dateFormatter.string(from: Date()))"
+    }
     
     private func getCurrentExchanceRate() {
         let getExchangeRatesHelper = GetExchangeRatesHelper()
